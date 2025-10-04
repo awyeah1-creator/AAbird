@@ -7,7 +7,7 @@ import 'package:aabird/integrations/perplexity/perplexity_prompt_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
-  const HomeScreen({Key? key, required this.title}) : super(key: key);
+  const HomeScreen({super.key, required this.title});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
