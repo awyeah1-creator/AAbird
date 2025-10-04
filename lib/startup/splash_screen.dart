@@ -20,20 +20,48 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     backgroundColor: Colors.blue, // You can customize
+  //     body: Center(
+  //       child: Text(
+  //         'AAbird',
+  //         style: TextStyle(
+  //           fontSize: 32,
+  //           color: Colors.white,
+  //           fontWeight: FontWeight.bold,
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue, // You can customize
+      backgroundColor: Colors.blue,
       body: Center(
-        child: Text(
-          'AAbird',
-          style: TextStyle(
-            fontSize: 32,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              'assets/images/wagtail_icon.png', // Update path if different
+              width: 80,   // Set your desired size
+              height: 80,
+            ),
+            SizedBox(height: 16), // Space between image and text
+            Text(
+              'AAbird',
+              style: TextStyle(
+                fontSize: 32,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
+
 }
