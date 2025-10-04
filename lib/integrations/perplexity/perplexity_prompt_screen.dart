@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'perplexity_api_service.dart'; // same folder, use relative path
 
 class PerplexityPromptScreen extends StatefulWidget {
-  const PerplexityPromptScreen({Key? key}) : super(key: key);
+  const PerplexityPromptScreen({super.key});
 
   @override
   State<PerplexityPromptScreen> createState() => _PerplexityPromptScreenState();
