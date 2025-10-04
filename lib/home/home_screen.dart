@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final AudioPlayer _player = AudioPlayer();
   final Random _random = Random();
 
-  // Grid images - exclude wagtail_icon.png (already shown above)
+  // List your grid images here
   final List<String> wagtailImages = [
     'assets/images/wagtail_epic.png',
     'assets/images/wagtail_river.png',
@@ -29,6 +29,13 @@ class _HomeScreenState extends State<HomeScreen> {
       _counter++;
     });
     await _player.play(AssetSource('audio/wagtail-chirp4.mp3'));
+  }
+
+  void _onGridIconTap() {
+    setState(() {
+      _counter++;
+    });
+    // Add sound or other actions here if desired
   }
 
   void _changeBackgroundColor() {
@@ -85,15 +92,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       childAspectRatio: 1,
                     ),
                     itemBuilder: (context, index) {
-                      return Card(
-                        elevation: 2,
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Image.asset(
-                          wagtailImages[index],
-                          fit: BoxFit.cover,
+                      return GestureDetector(
+                        onTap: _onGridIconTap,
+                        child: Card(
+                          elevation: 2,
+                          clipBehavior: Clip.antiAlias,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Image.asset(
+                            wagtailImages[index],
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       );
                     },
