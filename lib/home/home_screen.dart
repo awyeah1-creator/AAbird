@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -10,11 +11,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _counter = 0;
+  final AudioPlayer _player = AudioPlayer();
 
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
+  }
+
+  void _playChirp() async {
+    await _player.play(AssetSource('audio/wagtail-chirp4.mp3'));
   }
 
   @override
@@ -28,6 +34,15 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            GestureDetector(
+              onTap: _playChirp,
+              child: Image.asset(
+                'assets/images/wagtail_icon.png',
+                width: 120,
+                height: 120,
+              ),
+            ),
+            const SizedBox(height: 16),
             const Text('Welcome to AAbird Home Screen!'),
             const SizedBox(height: 24),
             Text('You have pushed the button this many times:'),
