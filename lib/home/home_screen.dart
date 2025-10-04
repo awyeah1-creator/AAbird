@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:math';
+// Make sure the path is correct for your project layout!
+import '../widgets/video_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -16,7 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final AudioPlayer _player = AudioPlayer();
   final Random _random = Random();
 
-  // List your grid images here
   final List<String> wagtailImages = [
     'assets/images/wagtail_epic.png',
     'assets/images/wagtail_river.png',
@@ -31,11 +32,20 @@ class _HomeScreenState extends State<HomeScreen> {
     await _player.play(AssetSource('audio/wagtail-chirp4.mp3'));
   }
 
-  void _onGridIconTap() {
+  void _onGridIconTap(int index) async {
     setState(() {
       _counter++;
     });
-    // Add sound or other actions here if desired
+    if (wagtailImages[index].contains('wagtail_gold.png')) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) =>
+              VideoScreen(videoAsset: 'assets/videos/JCloadingscreen.mp4'),
+        ),
+      );
+    }
+    // Optional: Play sound for all icons if you want
+    // await _player.play(AssetSource('audio/wagtail-chirp4.mp3'));
   }
 
   void _changeBackgroundColor() {
@@ -51,7 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final int crossAxisCount = (MediaQuery.of(context).size.width ~/ 140).clamp(2, 4);
+    final int crossAxisCount =
+    (MediaQuery.of(context).size.width ~/ 140).clamp(2, 4);
 
     return Scaffold(
       appBar: AppBar(
@@ -77,7 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 const Text('Welcome to AAbird Home Screen!'),
                 const SizedBox(height: 24),
                 Text('You have pushed the bird this many times:'),
-                Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
+                Text('$_counter',
+                    style: Theme.of(context).textTheme.headlineMedium),
                 const SizedBox(height: 32),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -93,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        onTap: _onGridIconTap,
+                        onTap: () => _onGridIconTap(index),
                         child: Card(
                           elevation: 2,
                           clipBehavior: Clip.antiAlias,
