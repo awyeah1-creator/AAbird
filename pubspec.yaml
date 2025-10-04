@@ -32,6 +32,7 @@ dependencies:
     sdk: flutter
   video_player: ^2.8.1  # For MP4 playback
   audioplayers: ^5.2.1  # For MP3 playback (optional)
+  http: ^1.1.0
 
 
   # The following adds the Cupertino Icons font to your application.

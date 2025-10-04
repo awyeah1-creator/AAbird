@@ -3,6 +3,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'dart:math';
 // Make sure the path is correct for your project layout!
 import '../widgets/video_screen.dart';
+import 'package:aabird/integrations/perplexity/perplexity_prompt_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -43,6 +44,15 @@ class _HomeScreenState extends State<HomeScreen> {
               VideoScreen(videoAsset: 'assets/videos/JCloadingscreen.mp4'),
         ),
       );
+      return;
+    }
+    if (wagtailImages[index].contains('wagtail_epic.png')) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const PerplexityPromptScreen(),
+        ),
+      );
+      return;
     }
     // Optional: Play sound for all icons if you want
     // await _player.play(AssetSource('audio/wagtail-chirp4.mp3'));
