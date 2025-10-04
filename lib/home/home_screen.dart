@@ -12,9 +12,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _counter = 0;
-  Color _backgroundColor = Colors.purple[50]!; // initial color (matches screenshot)
+  Color _backgroundColor = Colors.purple[50]!;
   final AudioPlayer _player = AudioPlayer();
   final Random _random = Random();
+
+  // Grid images - exclude wagtail_icon.png (already shown above)
+  final List<String> wagtailImages = [
+    'assets/images/wagtail_epic.png',
+    'assets/images/wagtail_river.png',
+    'assets/images/wagtail_sunflower.png',
+    'assets/images/wagtail_gold.png',
+  ];
 
   void _onIconTap() async {
     setState(() {
@@ -36,6 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final int crossAxisCount = (MediaQuery.of(context).size.width ~/ 140).clamp(2, 4);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -44,23 +54,53 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         color: _backgroundColor,
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: _onIconTap,
-                child: Image.asset(
-                  'assets/images/wagtail_icon.png',
-                  width: 120,
-                  height: 120,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: _onIconTap,
+                  child: Image.asset(
+                    'assets/images/wagtail_icon.png',
+                    width: 120,
+                    height: 120,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              const Text('Welcome to AAbird Home Screen!'),
-              const SizedBox(height: 24),
-              Text('You have pushed the bird this many times:'),
-              Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
-            ],
+                const SizedBox(height: 16),
+                const Text('Welcome to AAbird Home Screen!'),
+                const SizedBox(height: 24),
+                Text('You have pushed the bird this many times:'),
+                Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
+                const SizedBox(height: 32),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: wagtailImages.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 1,
+                    ),
+                    itemBuilder: (context, index) {
+                      return Card(
+                        elevation: 2,
+                        clipBehavior: Clip.antiAlias,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Image.asset(
+                          wagtailImages[index],
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
