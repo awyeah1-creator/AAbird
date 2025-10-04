@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
         // broken MaterialPageRoute(builder: (_) => HomeScreen()),
-        MaterialPageRoute(builder: (_) => HomeScreen(title: 'AAbird Home')),
+        MaterialPageRoute(builder: (_) => HomeScreen(title: 'Angry Wagtails')),
       );
     });
   }
