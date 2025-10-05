@@ -2,23 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart'; // For clipboard
 import 'perplexity_api_service.dart';
-import 'wagtail_prompts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
+class WagtailOpenQueryWidget extends StatefulWidget {
+  final String Function(String) promptFn;
+  final String topic;
 
-class WagtailFactWidget extends StatefulWidget {
-  const WagtailFactWidget({super.key});
+  const WagtailOpenQueryWidget({Key? key, required this.promptFn, required this.topic}) : super(key: key);
 
   @override
-  State<WagtailFactWidget> createState() => _WagtailFactWidgetState();
+  State<WagtailOpenQueryWidget> createState() => _WagtailOpenQueryWidgetState();
 }
 
-class _WagtailFactWidgetState extends State<WagtailFactWidget> with SingleTickerProviderStateMixin {
+class _WagtailOpenQueryWidgetState extends State<WagtailOpenQueryWidget> with SingleTickerProviderStateMixin {
   String _fact = '';
   bool _isLoading = false;
   String? _error;
   late AnimationController _controller;
-  late Animation<double> _bounce;
+  late Animation _bounce;
 
   @override
   void initState() {
@@ -27,9 +28,9 @@ class _WagtailFactWidgetState extends State<WagtailFactWidget> with SingleTicker
       vsync: this,
       duration: const Duration(milliseconds: 700),
     );
-    _bounce = Tween<double>(begin: 0, end: 10).chain(CurveTween(curve: Curves.elasticInOut))
+    _bounce = Tween(begin: 0.0, end: 10.0)
+        .chain(CurveTween(curve: Curves.elasticInOut))
         .animate(_controller);
-
     fetchFact();
   }
 
@@ -39,22 +40,18 @@ class _WagtailFactWidgetState extends State<WagtailFactWidget> with SingleTicker
     super.dispose();
   }
 
-  Future<void> fetchFact() async {
+  Future fetchFact() async {
     setState(() {
       _isLoading = true;
       _error = null;
     });
-
     try {
-      final prompt = wagtailFactPrompt(""); // Ensure prompt says "no reference marks"
+      final prompt = widget.promptFn(widget.topic);
       final response = await PerplexityApiService.getPromptResponse(prompt);
-
       setState(() {
         _fact = response;
         _isLoading = false;
       });
-
-      // Start the bounce animation
       _controller.forward(from: 0.0);
     } catch (e) {
       setState(() {
@@ -129,8 +126,9 @@ class _WagtailFactWidgetState extends State<WagtailFactWidget> with SingleTicker
                       label: Text(
                         'Did you know?',
                         style: GoogleFonts.fredoka(
-                            color: Colors.deepOrange,
-                            fontWeight: FontWeight.w600),
+                          color: Colors.deepOrange,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       backgroundColor: Colors.deepOrange[100],
                     ),
@@ -157,10 +155,8 @@ class _WagtailFactWidgetState extends State<WagtailFactWidget> with SingleTicker
                         color: Colors.brown[800],
                       ),
                       minFontSize: 14,
-                      overflow: TextOverflow.visible, // Ensures full text display
-                    )
-                    ,
-
+                      overflow: TextOverflow.visible,
+                    ),
                     const SizedBox(height: 24),
                     Row(
                       mainAxisSize: MainAxisSize.min,

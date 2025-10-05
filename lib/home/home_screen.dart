@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:math';
-// Make sure the path is correct for your project layout!
 import '../widgets/video_screen.dart';
-// import 'package:aabird/integrations/perplexity/perplexity_prompt_screen.dart';
 import 'package:aabird/integrations/perplexity/wagtail_fact_screen.dart';
-import 'package:aabird/home/home_screen_v2.dart';
+import 'package:aabird/integrations/perplexity/wagtail_openquery_widget.dart';
+import 'package:aabird/integrations/perplexity/wagtail_prompts.dart'; // ensure this imports openFactPrompt, rsmFactPrompt
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -60,13 +59,47 @@ class _HomeScreenState extends State<HomeScreen> {
     if (wagtailImages[index].contains('wagtail_epic.png')) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => HomeScreenV2(),
+          builder: (context) => WagtailOpenQueryWidget(
+            promptFn: rsmFactPrompt, // expects String Function(String)
+            topic: "RSM Australia",
+          ),
         ),
       );
       return;
     }
-    // Optional: Play sound for all icons if you want
-    // await _player.play(AssetSource('audio/wagtail-chirp4.mp3'));
+    if (wagtailImages[index].contains('wagtail_sunflower.png')) {
+      final extraContext = await showDialog<String>(
+        context: context,
+        builder: (context) {
+          String input = "";
+          return AlertDialog(
+            title: Text('Enter a topic for your Perth fun fact'),
+            content: TextField(
+              autofocus: true,
+              onChanged: (value) { input = value; },
+              decoration: InputDecoration(hintText: "e.g. parrot, weather, city council"),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, input),
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      if (extraContext != null && extraContext.trim().isNotEmpty) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => WagtailOpenQueryWidget(
+              promptFn: openFactPrompt,
+              topic: extraContext.trim(),
+            ),
+          ),
+        );
+      }
+      return;
+    }
   }
 
   void _changeBackgroundColor() {
@@ -82,8 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final int crossAxisCount =
-    (MediaQuery.of(context).size.width ~/ 140).clamp(2, 4);
+    final int crossAxisCount = (MediaQuery.of(context).size.width ~/ 140).clamp(2, 4);
 
     return Scaffold(
       appBar: AppBar(
