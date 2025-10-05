@@ -21,10 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
   final Random _random = Random();
 
   final List<String> wagtailImages = [
-    'assets/images/wagtail_epic.png',
-    'assets/images/wagtail_river.png',
-    'assets/images/wagtail_sunflower.png',
-    'assets/images/wagtail_gold.png',
+    'assets/images/wagtail_facts.png',
+    'assets/images/wagtail_pplx.png',
+    'assets/images/wagtail_rsm.png',
+    'assets/images/wagtail_tv.png',
   ];
 
   void _onIconTap() async {
@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _counter++;
     });
     await _player.play(AssetSource('audio/wagtail-chirp4.mp3'));
-    if (wagtailImages[index].contains('wagtail_gold.png')) {
+    if (wagtailImages[index].contains('wagtail_tv.png')) {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) =>
@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
       return;
     }
-    if (wagtailImages[index].contains('wagtail_river.png')) {
+    if (wagtailImages[index].contains('wagtail_facts.png')) {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => const WagtailFactScreen(),
@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
       return;
     }
-    if (wagtailImages[index].contains('wagtail_epic.png')) {
+    if (wagtailImages[index].contains('wagtail_rsm.png')) {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => WagtailOpenQueryWidget(
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
       return;
     }
-    if (wagtailImages[index].contains('wagtail_sunflower.png')) {
+    if (wagtailImages[index].contains('wagtail_pplx.png')) {
       final extraContext = await showDialog<String>(
         context: context,
         builder: (context) {

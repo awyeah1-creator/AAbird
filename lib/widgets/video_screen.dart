@@ -18,9 +18,11 @@ class _VideoScreenState extends State<VideoScreen> {
 
   // List of all videos in order
   final List<String> _videoAssets = [
-    'assets/videos/JCloadingscreen.mp4',
-    'assets/videos/wagtail_intro1.mp4',
+    'assets/videos/wagtail_intro3.mp4',
+    'assets/videos/wagtail_trump.mp4',
+    'assets/videos/wagtail_sad2.mp4',
     'assets/videos/wagtail_intro2.mp4',
+    'assets/videos/JCloadingscreen.mp4',
   ];
 
   @override
