@@ -1,5 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:aabird/integrations/perplexity/wagtail_fact_widget.dart';
+// import 'package:aabird/integrations/perplexity/wagtail_fact_widget.dart';
+import 'package:aabird/integrations/perplexity/wagtail_prompts.dart'; // Make sure prompt function is here!
+import 'package:aabird/integrations/perplexity/wagtail_openquery_widget.dart';
+
+class WagtailTriviaScreen extends StatelessWidget {
+  const WagtailTriviaScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Wagtail Trivia')),
+      body: Center(
+        child: WagtailOpenQueryWidget(promptFn: wagtailFactPrompt), // Any prompt function
+      ),
+    );
+  }
+}
 
 class HomeScreenV2 extends StatelessWidget {
   @override
@@ -34,7 +49,7 @@ class HomeScreenV2 extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => WagtailFactWidget()),
+                        MaterialPageRoute(builder: (context) => WagtailOpenQueryWidget(promptFn: rsmFactPrompt)),
                     );
                   },
                   child: Text('Wagtail tip'),
