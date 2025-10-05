@@ -4,6 +4,7 @@ import 'dart:math';
 // Make sure the path is correct for your project layout!
 import '../widgets/video_screen.dart';
 import 'package:aabird/integrations/perplexity/perplexity_prompt_screen.dart';
+import 'package:aabird/integrations/perplexity/wagtail_fact_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -42,6 +43,14 @@ class _HomeScreenState extends State<HomeScreen> {
         MaterialPageRoute(
           builder: (context) =>
               VideoScreen(videoAsset: 'assets/videos/JCloadingscreen.mp4'),
+        ),
+      );
+      return;
+    }
+    if (wagtailImages[index].contains('wagtail_river.png')) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const WagtailFactScreen(),
         ),
       );
       return;
