@@ -34,6 +34,8 @@ dependencies:
   audioplayers: ^5.2.1  # For MP3 playback (optional)
   http: ^1.1.0
   flutter_launcher_icons: ^0.13.1
+  google_fonts: ^6.3.2
+  auto_size_text: ^3.0.0
 
 #  flutter_icons:
 #    android: true
