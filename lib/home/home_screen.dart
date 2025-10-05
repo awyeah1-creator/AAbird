@@ -3,8 +3,9 @@ import 'package:audioplayers/audioplayers.dart';
 import 'dart:math';
 // Make sure the path is correct for your project layout!
 import '../widgets/video_screen.dart';
-import 'package:aabird/integrations/perplexity/perplexity_prompt_screen.dart';
+// import 'package:aabird/integrations/perplexity/perplexity_prompt_screen.dart';
 import 'package:aabird/integrations/perplexity/wagtail_fact_screen.dart';
+import 'package:aabird/home/home_screen_v2.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -38,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _counter++;
     });
+    await _player.play(AssetSource('audio/wagtail-chirp4.mp3'));
     if (wagtailImages[index].contains('wagtail_gold.png')) {
       Navigator.of(context).push(
         MaterialPageRoute(
@@ -58,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (wagtailImages[index].contains('wagtail_epic.png')) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => const PerplexityPromptScreen(),
+          builder: (context) => HomeScreenV2(),
         ),
       );
       return;
@@ -87,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(widget.title),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        centerTitle: true,
       ),
       body: Container(
         color: _backgroundColor,

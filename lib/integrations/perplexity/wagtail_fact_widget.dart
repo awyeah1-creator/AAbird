@@ -156,10 +156,10 @@ class _WagtailFactWidgetState extends State<WagtailFactWidget> with SingleTicker
                         fontWeight: FontWeight.bold,
                         color: Colors.brown[800],
                       ),
-                      maxLines: 8,        // Adjust as needed
                       minFontSize: 14,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                      overflow: TextOverflow.visible, // Ensures full text display
+                    )
+                    ,
 
                     const SizedBox(height: 24),
                     Row(

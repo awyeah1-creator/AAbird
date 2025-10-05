@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'perplexity_api_service.dart'; // same folder, use relative path
+// # not using this anymore was a first try, could be used as example code it just displays a unformatted output page
 
 class PerplexityPromptScreen extends StatefulWidget {
   const PerplexityPromptScreen({super.key});
