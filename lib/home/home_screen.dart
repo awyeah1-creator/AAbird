@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:animate_gradient/animate_gradient.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:math';
 import '../widgets/video_screen.dart';
@@ -16,7 +17,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _counter = 0;
-  Color _backgroundColor = Colors.purple[50]!;
   final AudioPlayer _player = AudioPlayer();
   final Random _random = Random();
 
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => WagtailOpenQueryWidget(
-            promptFn: rsmFactPrompt, // expects String Function(String)
+            promptFn: rsmFactPrompt,
             topic: "RSM Australia",
           ),
         ),
@@ -76,7 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Text('Enter a topic for your Perth fun fact'),
             content: TextField(
               autofocus: true,
-              onChanged: (value) { input = value; },
+              onChanged: (value) {
+                input = value;
+              },
               decoration: InputDecoration(hintText: "e.g. parrot, weather, city council"),
             ),
             actions: [
@@ -102,17 +104,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void _changeBackgroundColor() {
-    setState(() {
-      _backgroundColor = Color.fromARGB(
-        255,
-        _random.nextInt(256),
-        _random.nextInt(256),
-        _random.nextInt(256),
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final int crossAxisCount = (MediaQuery.of(context).size.width ~/ 140).clamp(2, 4);
@@ -123,8 +114,17 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         centerTitle: true,
       ),
-      body: Container(
-        color: _backgroundColor,
+      body: AnimateGradient(
+        primaryColors: const [
+          Color(0xFFB993D6), // Purple
+          Color(0xFF8CA6DB), // Blue
+          Color(0xFFF98CA6), // Pink
+        ],
+        secondaryColors: const [
+          Color(0xFFF5EFA0), // Yellow
+          Color(0xFFA6FFD6), // Green
+          Color(0xFFF6A6FF), // Light Pink
+        ],
         child: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -181,7 +181,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _changeBackgroundColor,
+        onPressed: () {
+          setState(() {});
+        },
         tooltip: 'Change background',
         child: const Icon(Icons.add),
       ),
