@@ -43,7 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) =>
-              VideoScreen(videoAsset: 'assets/videos/JCloadingscreen.mp4'),
+              // VideoScreen(videoAsset: 'assets/videos/JCloadingscreen.mp4'),
+              VideoScreen(),
         ),
       );
       return;
