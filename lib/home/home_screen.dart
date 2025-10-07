@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     'assets/images/wagtail_tv.png',
   ];
 
+  // Increment the home screen counter
   void _onIconTap() async {
     setState(() {
       _counter++;
