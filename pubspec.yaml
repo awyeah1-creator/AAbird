@@ -16,7 +16,12 @@ dependencies:
   google_fonts: ^6.3.2
   auto_size_text: ^3.0.0
   animate_gradient: ^0.0.3
-  # cupertino_icons: ^1.0.8   # Uncomment this if you use Cupertino icons
+  speech_to_text: ^7.3.0
+  flutter_tts: ^3.8.5
+  sqflite: ^2.3.0          # For local storage
+  path: ^1.8.3             # Required for SQLite
+  permission_handler: ^11.0.1  # For microphone permissions
+
 
 dev_dependencies:
   flutter_test:
