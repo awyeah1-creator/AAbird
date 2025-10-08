@@ -42,4 +42,4 @@ lib/apikeys.dart
 *.env
 .env*
 assets/
-wagtail_promts.dart
+lib/integrations/perplexity/wagtail_prompts.dart
