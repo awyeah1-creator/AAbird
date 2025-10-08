@@ -43,6 +43,7 @@ lib/apikeys.dart
 .env*
 assets/
 wagtail_promts.dart
+aabird-clean/
 .gradle/
 local.properties
 # Android signing keys - Never commit these!
