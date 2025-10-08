@@ -1,8 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [1.0.2] - 2025-10-08
+## [Unreleased]
+- Removed embedded repo aabird-clean
+- Updated .gitignore to ignore aabird-clean/ and wagtail_prompts.dart
+- Deleted tracked sensitive file lib/integrations/perplexity/wagtail_prompts.dart
+- Added wagtail_prompts.example.dart as template for prompt logic
+- Updated documentation (README.md) to include workflow for sensitive files and assets
+- Confirmed TTS works on device
 
+## [1.0.2] - 2025-10-08
 ### Added
 - **Text-to-Speech (TTS) Feature**: Implemented TTS functionality, tested on physical device and confirmed working as expected
 - **App Launch Capability**: Code additions enable successful app launches
@@ -39,7 +46,6 @@ All notable changes to this project will be documented in this file.
 ---
 
 ## [1.0.1] - 2025-10-05 18:26 AWST
-
 ### Added
 - **Multiplatform Launcher Icons**: Implemented custom wagtail icon across Android, Web, and Windows platforms using flutter_launcher_icons package
 - **Wagtail Fact Widget**: Created responsive UI widget displaying AI-generated wagtail facts with animations and visual polish
