@@ -43,3 +43,31 @@ lib/apikeys.dart
 .env*
 assets/
 wagtail_promts.dart
+.gradle/
+local.properties
+# Android signing keys - Never commit these!
+*.keystore
+
+# Flutter plugins - May be regenerated
+.flutter-plugins
+
+# Flutter package config (legacy)
+.packages
+
+# iOS build output (not needed in version control)
+/ios/build/
+
+# Android build output (not needed in version control)
+/android/build/
+
+# Crashlytics and Firebase build output
+crashlytics/
+
+# Test results and artifacts
+test-results/
+
+# macOS build output
+/macos/build/
+
+# web build output
+/web/build/
